@@ -1,0 +1,48 @@
+.item-container {
+  padding: 20px;
+}
+
+.item-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  background-color: #673ab7;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+}
+
+.item-header {
+  background-color: #673ab7;
+  color: white;
+}
+
+.item-row {
+  margin: 10px 0;
+  display: flex;
+}
+
+.item-col {
+  width: 20%;
+  max-width: 20%;
+  text-align: center;
+}
+
+.item-action-icon {
+  color: #673ab7;
+  cursor: pointer;
+}
+
+.item-action-icon:last-child {
+  margin-left: 20px;
+}

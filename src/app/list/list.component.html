@@ -1,0 +1,36 @@
+<div class="item-container">
+  <!-- Title -->
+  <div class="item-title">
+    <h1>Items</h1>
+    <button class="item-button" (click)="onAddItem()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <!-- Header -->
+  <mat-card class="item-row item-header">
+    <div class="item-col">Name</div>
+    <div class="item-col">Sell In</div>
+    <div class="item-col">Quality</div>
+    <div class="item-col">Type</div>
+    <div class="item-col">Actions</div>
+  </mat-card>
+
+  <!-- Content -->
+  <div *ngFor="let item of items">
+    <mat-card class="item-row">
+      <div class="item-col">{{ item.name }}</div>
+      <div class="item-col">{{ item.sellIn }}</div>
+      <div class="item-col">{{ item.quality }}</div>
+      <div class="item-col">{{ item.type }}</div>
+      <div class="item-col">
+        <mat-icon class="item-action-icon" (click)="onUpdateItem(item)">
+          edit
+        </mat-icon>
+        <mat-icon class="item-action-icon" (click)="onDeleteItem(item)">
+          delete
+        </mat-icon>
+      </div>
+    </mat-card>
+  </div>
+</div>

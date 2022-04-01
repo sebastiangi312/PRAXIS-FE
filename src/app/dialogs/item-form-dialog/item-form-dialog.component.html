@@ -1,0 +1,39 @@
+<div class="item-form-dialog-container">
+  <h2>{{ isUpdating ? "Updating item" : "Add new Item" }}</h2>
+
+  <div [formGroup]="form" class="item-form-dialog-controls">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Sell In</mat-label>
+      <input matInput formControlName="sellIn" type="number" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Quality</mat-label>
+      <input matInput formControlName="quality" type="number" />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <input matInput formControlName="type" />
+    </mat-form-field>
+  </div>
+
+  <div class="item-form-dialog-actions">
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!form.valid"
+      (click)="onConfirm()"
+    >
+      {{ isUpdating ? "Update" : "Add" }}
+    </button>
+    <button mat-stroked-button color="primary" (click)="onCancel()">
+      Cancel
+    </button>
+  </div>
+</div>
