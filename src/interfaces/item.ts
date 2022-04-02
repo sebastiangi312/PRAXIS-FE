@@ -1,12 +1,12 @@
 export interface Item {
-  id: number;
+  id?: number;
   name: string;
   sellIn: number;
   quality: number;
-  type: Type;
+  type: Types;
 }
 
-export enum Type {
+export enum Types {
   AGED,
   NORMAL,
   LEGENDARY,

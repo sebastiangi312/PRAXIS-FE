@@ -1,36 +1,49 @@
-<div class="item-container">
+<div class="list-container">
   <!-- Title -->
-  <div class="item-title">
-    <h1>Items</h1>
-    <button class="item-button" (click)="onAddItem()">
+  <div class="list-title-wrapper">
+    <span class="list-title">Items</span>
+    <button class="list-button" (click)="onAddItem()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
 
   <!-- Header -->
-  <mat-card class="item-row item-header">
-    <div class="item-col">Name</div>
-    <div class="item-col">Sell In</div>
-    <div class="item-col">Quality</div>
-    <div class="item-col">Type</div>
-    <div class="item-col">Actions</div>
+  <mat-card class="list-row list-header">
+    <div class="list-col">Name</div>
+    <div class="list-col">Sell In</div>
+    <div class="list-col">Quality</div>
+    <div class="list-col">Type</div>
+    <div class="list-col">Actions</div>
   </mat-card>
 
   <!-- Content -->
-  <div *ngFor="let item of items">
-    <mat-card class="item-row">
-      <div class="item-col">{{ item.name }}</div>
-      <div class="item-col">{{ item.sellIn }}</div>
-      <div class="item-col">{{ item.quality }}</div>
-      <div class="item-col">{{ item.type }}</div>
-      <div class="item-col">
-        <mat-icon class="item-action-icon" (click)="onUpdateItem(item)">
-          edit
-        </mat-icon>
-        <mat-icon class="item-action-icon" (click)="onDeleteItem(item)">
-          delete
-        </mat-icon>
-      </div>
-    </mat-card>
+
+  <div *ngIf="isLoading" class="list-empty">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
   </div>
+
+  <div *ngIf="!items.length && !isLoading" class="list-empty">
+    <mat-icon class="list-no-info">visibility_off</mat-icon>
+    <span>No items</span>
+  </div>
+
+  <ng-container *ngIf="items.length">
+    <div *ngFor="let item of items">
+      <mat-card class="list-row">
+        <div class="list-col">{{ item.name }}</div>
+        <div class="list-col">{{ item.sellIn }}</div>
+        <div class="list-col">{{ item.quality }}</div>
+        <div class="list-col">{{ item.type }}</div>
+        <div class="list-col">
+          <mat-icon class="list-action-icon" (click)="onUpdateItem(item)">
+            edit
+          </mat-icon>
+          <mat-icon class="list-action-icon" (click)="onViewItem(item)">
+            visibility
+          </mat-icon>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
 </div>

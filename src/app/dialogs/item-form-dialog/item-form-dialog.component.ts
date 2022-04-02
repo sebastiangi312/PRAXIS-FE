@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Item } from 'src/interfaces/item';
+import { Item, Types } from 'src/interfaces/item';
 
 @Component({
   selector: 'item-form-dialog',
@@ -10,6 +10,7 @@ import { Item } from 'src/interfaces/item';
 })
 export class ItemFormDialogComponent implements OnInit {
   isUpdating = false;
+  types = Object.values(Types);
 
   constructor(
     private fb: FormBuilder,
@@ -20,21 +21,26 @@ export class ItemFormDialogComponent implements OnInit {
   form = this.fb.group({
     name: ['', [Validators.required]],
     sellIn: ['', [Validators.required]],
-    quality: ['', [Validators.required]],
+    quality: [
+      '',
+      [Validators.required, Validators.min(0), Validators.max(100)],
+    ],
     type: ['', [Validators.required]],
   });
 
   ngOnInit(): void {
     this.isUpdating = !!this.data;
 
+    this.types.length = this.types.length / 2;
+
     if (this.isUpdating) {
-      const { name, sellIn, quality, type } = this.data.item;
-      this.form.setValue({ name, sellIn, quality, type });
+      const { id, ...content } = this.data.item;
+      this.form.setValue({ ...content });
     }
   }
 
   onConfirm(): void {
-    this.dialogRef.close({ ...this.data.item, ...this.form.value });
+    this.dialogRef.close({ ...this.form.value });
   }
 
   onCancel(): void {

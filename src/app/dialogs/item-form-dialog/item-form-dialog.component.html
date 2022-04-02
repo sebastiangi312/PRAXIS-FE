@@ -15,11 +15,21 @@
     <mat-form-field appearance="outline">
       <mat-label>Quality</mat-label>
       <input matInput formControlName="quality" type="number" />
+      <mat-error *ngIf="form.get('quality')?.hasError('min')">
+        Expected value between 0 and 100
+      </mat-error>
+      <mat-error *ngIf="form.get('quality')?.hasError('max')">
+        Expected value between 0 and 100
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Type</mat-label>
-      <input matInput formControlName="type" />
+      <mat-select formControlName="type">
+        <ng-container *ngFor="let type of types">
+          <mat-option [value]="type">{{ type }}</mat-option>
+        </ng-container>
+      </mat-select>
     </mat-form-field>
   </div>
 
