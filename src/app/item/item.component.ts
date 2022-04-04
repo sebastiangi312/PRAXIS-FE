@@ -34,7 +34,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getItem();
   }
 

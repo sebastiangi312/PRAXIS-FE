@@ -19,6 +19,12 @@
     <span class="item-label">Type</span>
     <span class="item-value">{{ item.type }}</span>
 
-    <mat-icon class="item-go-back" (click)="onGoBack()">arrow_back</mat-icon>
+    <mat-icon
+      data-automation="item-go-back"
+      class="item-go-back"
+      (click)="onGoBack()"
+    >
+      arrow_back
+    </mat-icon>
   </div>
 </div>

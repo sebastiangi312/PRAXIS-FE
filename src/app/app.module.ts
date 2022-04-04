@@ -10,7 +10,6 @@ import { ItemService } from 'src/api/item.service';
 
 // Components
 import { AppComponent } from './app.component';
-import { InsightsComponent } from './insights/insights.component';
 import { ListComponent } from './list/list.component';
 import { ItemComponent } from './item/item.component';
 import { MatCardModule } from '@angular/material/card';
@@ -29,7 +28,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AppComponent,
     ListComponent,
     ItemComponent,
-    InsightsComponent,
     ItemFormDialogComponent,
   ],
   imports: [

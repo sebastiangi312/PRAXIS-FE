@@ -17,7 +17,6 @@
   </mat-card>
 
   <!-- Content -->
-
   <div *ngIf="isLoading" class="list-empty">
     <mat-progress-spinner color="primary" mode="indeterminate">
     </mat-progress-spinner>
@@ -36,10 +35,18 @@
         <div class="list-col">{{ item.quality }}</div>
         <div class="list-col">{{ item.type }}</div>
         <div class="list-col">
-          <mat-icon class="list-action-icon" (click)="onUpdateItem(item)">
+          <mat-icon
+            data-automation="list-edit-item"
+            class="list-action-icon"
+            (click)="onUpdateItem(item)"
+          >
             edit
           </mat-icon>
-          <mat-icon class="list-action-icon" (click)="onViewItem(item)">
+          <mat-icon
+            data-automation="list-view-item"
+            class="list-action-icon"
+            (click)="onViewItem(item)"
+          >
             visibility
           </mat-icon>
         </div>

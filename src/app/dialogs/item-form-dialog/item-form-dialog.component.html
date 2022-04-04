@@ -1,7 +1,11 @@
 <div class="item-form-dialog-container">
   <h2>{{ isUpdating ? "Updating item" : "Add new Item" }}</h2>
 
-  <div [formGroup]="form" class="item-form-dialog-controls">
+  <div
+    data-automation="item-form"
+    [formGroup]="form"
+    class="item-form-dialog-controls"
+  >
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
       <input matInput formControlName="name" />
@@ -35,6 +39,7 @@
 
   <div class="item-form-dialog-actions">
     <button
+      data-automation="item-form-confirm"
       mat-raised-button
       color="primary"
       [disabled]="!form.valid"
@@ -42,7 +47,12 @@
     >
       {{ isUpdating ? "Update" : "Add" }}
     </button>
-    <button mat-stroked-button color="primary" (click)="onCancel()">
+    <button
+      data-automation="item-form-cancel"
+      mat-stroked-button
+      color="primary"
+      (click)="onCancel()"
+    >
       Cancel
     </button>
   </div>
