@@ -12,6 +12,8 @@ import { ItemService } from 'src/api/item.service';
 import { AppComponent } from './app.component';
 import { ListComponent } from './list/list.component';
 import { ItemComponent } from './item/item.component';
+import { InsightsComponent } from './insights/insights.component';
+import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { ItemFormDialogComponent } from './dialogs/item-form-dialog/item-form-dialog.component';
@@ -22,9 +24,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 import { ErrorCatchingInterceptor } from 'src/api/error-catching-interceptor';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ItemComponent,
     ItemFormDialogComponent,
     DeleteDialogComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    InsightsComponent,
   ],
   imports: [
     ReactiveFormsModule,
@@ -49,15 +52,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatButtonModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
     RouterModule.forRoot(routes, { enableTracing: false }),
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorCatchingInterceptor,
-      multi: true
+      multi: true,
     },
-    ItemService
+    ItemService,
   ],
   bootstrap: [AppComponent],
 })

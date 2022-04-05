@@ -34,4 +34,9 @@ export class ItemService {
     const endpoint = `${this.apiURL}items/${item.id}`;
     return this.httpClient.put<Item>(endpoint, item);
   }
+
+  updateQuality(): Observable<Item> {
+    const endpoint = `${this.apiURL}items/quality`;
+    return this.httpClient.post<Item>(endpoint, null);
+  }
 }
