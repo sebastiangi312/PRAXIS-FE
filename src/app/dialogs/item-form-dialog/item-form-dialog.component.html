@@ -39,7 +39,7 @@
 
   <div class="item-form-dialog-actions">
     <button
-      data-automation="item-form-confirm"
+      data-automation="item-form-confirm-button"
       mat-raised-button
       color="primary"
       [disabled]="!form.valid"
@@ -47,8 +47,9 @@
     >
       {{ isUpdating ? "Update" : "Add" }}
     </button>
+
     <button
-      data-automation="item-form-cancel"
+      data-automation="item-form-cancel-button"
       mat-stroked-button
       color="primary"
       (click)="onCancel()"

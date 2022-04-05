@@ -21,18 +21,12 @@ export class ItemFormDialogComponent implements OnInit {
   form = this.fb.group({
     name: ['', [Validators.required]],
     sellIn: ['', [Validators.required]],
-    quality: [
-      '',
-      [Validators.required, Validators.min(0), Validators.max(80)],
-    ],
+    quality: ['', [Validators.required, Validators.min(0), Validators.max(80)]],
     type: ['', [Validators.required]],
   });
 
   ngOnInit(): void {
     this.isUpdating = !!this.data;
-
-    this.types.length = this.types.length / 2;
-
     if (this.isUpdating) {
       const { id, ...content } = this.data.item;
       this.form.setValue({ ...content });

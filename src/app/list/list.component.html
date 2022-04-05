@@ -2,9 +2,27 @@
   <!-- Title -->
   <div class="list-title-wrapper">
     <span class="list-title">Items</span>
-    <button class="list-button" (click)="onAddItem()">
-      <mat-icon>add</mat-icon>
-    </button>
+    <div class="list-buttons">
+      <button class="list-add-button" (click)="onAddItem()">
+        <mat-icon>add</mat-icon>
+      </button>
+
+      <button
+        class="list-insights-button"
+        (click)="onViewInsights()"
+        data-automation="list-insights-button"
+      >
+        Insights
+      </button>
+
+      <button
+        class="list-update-button"
+        (click)="onUpdateQuality()"
+        data-automation="list-update-quality-button"
+      >
+        Update quality
+      </button>
+    </div>
   </div>
 
   <!-- Header -->
@@ -29,17 +47,14 @@
 
   <ng-container *ngIf="items.length">
     <div *ngFor="let item of items">
-      <mat-card
-        data-automation="list-item"
-        class="list-row"
-      >
+      <mat-card data-automation="list-item-row" class="list-row">
         <div class="list-col">{{ item.name }}</div>
         <div class="list-col">{{ item.sellIn }}</div>
         <div class="list-col">{{ item.quality }}</div>
         <div class="list-col">{{ item.type }}</div>
         <div class="list-col">
           <mat-icon
-            data-automation="list-edit-item"
+            data-automation="list-edit-button"
             class="list-action-icon"
             color="primary"
             (click)="onUpdateItem(item)"
@@ -47,7 +62,7 @@
             edit
           </mat-icon>
           <mat-icon
-            data-automation="list-delete-item"
+            data-automation="list-delete-button"
             class="list-action-icon"
             color="primary"
             (click)="onDeleteItem(item)"
@@ -55,7 +70,7 @@
             delete
           </mat-icon>
           <mat-icon
-            data-automation="list-view-item"
+            data-automation="list-view-button"
             class="list-action-icon"
             color="primary"
             (click)="onViewItem(item)"

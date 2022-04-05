@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ItemFormDialogComponent } from '../dialogs/item-form-dialog/item-form-dialog.component';
 import { DeleteDialogComponent } from '../dialogs/delete-dialog/delete-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'list',
@@ -21,7 +22,8 @@ export class ListComponent implements OnInit, OnDestroy {
     private itemsService: ItemService,
     private dialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar
   ) {}
 
   getItems(): void {
@@ -104,7 +106,38 @@ export class ListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onUpdateQuality(): void {
+    this.itemsService
+      .updateQuality()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: () => {
+          this.getItems();
+          this.openSnackbar(
+            'The quality has been updated for all the items.',
+            'success'
+          );
+        },
+        error: () => {
+          this.openSnackbar('Uppsss! something went wrong.', 'error');
+        },
+      });
+  }
+
+  onViewInsights(): void {
+    this.router.navigate(['../insights'], { relativeTo: this.route });
+  }
+
   onViewItem(item: Item): void {
     this.router.navigate([item.id], { relativeTo: this.route });
+  }
+
+  openSnackbar(message: string, type: string): void {
+    this.snackBar.open(message, '', {
+      duration: 2000,
+      horizontalPosition: 'left',
+      verticalPosition: 'bottom',
+      panelClass: [`snackbar-${type}`],
+    });
   }
 }
