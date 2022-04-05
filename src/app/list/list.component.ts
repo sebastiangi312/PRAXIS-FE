@@ -4,6 +4,7 @@ import { ItemService } from 'src/api/item.service';
 import { Item } from 'src/interfaces/item';
 import { MatDialog } from '@angular/material/dialog';
 import { ItemFormDialogComponent } from '../dialogs/item-form-dialog/item-form-dialog.component';
+import { DeleteDialogComponent } from '../dialogs/delete-dialog/delete-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
@@ -55,6 +56,26 @@ export class ListComponent implements OnInit, OnDestroy {
         if (!item) return;
         this.itemsService
           .addItem(item)
+          .pipe(takeUntil(this.unsubscribe$))
+          .subscribe({
+            next: () => this.getItems(),
+          });
+      });
+  }
+
+  onDeleteItem(item: Item): void {
+    const dialogRef = this.dialog.open(DeleteDialogComponent, {
+      disableClose: true,
+      data: { name: item.name },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((shouldDelete) => {
+        if (!shouldDelete) return;
+        this.itemsService
+          .deleteItem(item.id)
           .pipe(takeUntil(this.unsubscribe$))
           .subscribe({
             next: () => this.getItems(),

@@ -23,7 +23,7 @@ export class ItemFormDialogComponent implements OnInit {
     sellIn: ['', [Validators.required]],
     quality: [
       '',
-      [Validators.required, Validators.min(0), Validators.max(100)],
+      [Validators.required, Validators.min(0), Validators.max(80)],
     ],
     type: ['', [Validators.required]],
   });

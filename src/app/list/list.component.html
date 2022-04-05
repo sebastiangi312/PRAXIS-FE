@@ -29,7 +29,10 @@
 
   <ng-container *ngIf="items.length">
     <div *ngFor="let item of items">
-      <mat-card class="list-row">
+      <mat-card
+        data-automation="list-item"
+        class="list-row"
+      >
         <div class="list-col">{{ item.name }}</div>
         <div class="list-col">{{ item.sellIn }}</div>
         <div class="list-col">{{ item.quality }}</div>
@@ -38,13 +41,23 @@
           <mat-icon
             data-automation="list-edit-item"
             class="list-action-icon"
+            color="primary"
             (click)="onUpdateItem(item)"
           >
             edit
           </mat-icon>
           <mat-icon
+            data-automation="list-delete-item"
+            class="list-action-icon"
+            color="primary"
+            (click)="onDeleteItem(item)"
+          >
+            delete
+          </mat-icon>
+          <mat-icon
             data-automation="list-view-item"
             class="list-action-icon"
+            color="primary"
             (click)="onViewItem(item)"
           >
             visibility

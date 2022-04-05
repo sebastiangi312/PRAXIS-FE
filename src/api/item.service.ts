@@ -15,6 +15,11 @@ export class ItemService {
     return this.httpClient.post<Item>(endpoint, item);
   }
 
+  deleteItem(id: number): Observable<any> {
+    const endpoint = `${this.apiURL}items/${id}`;
+    return this.httpClient.delete<Item>(endpoint);
+  }
+
   getItems(): Observable<Item[]> {
     const endpoint = `${this.apiURL}items`;
     return this.httpClient.get<Item[]>(endpoint);

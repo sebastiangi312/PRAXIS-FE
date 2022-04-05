@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { routes } from './app.routes';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Services
 import { ItemService } from 'src/api/item.service';
@@ -22,6 +22,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
+import { ErrorCatchingInterceptor } from 'src/api/error-catching-interceptor';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ListComponent,
     ItemComponent,
     ItemFormDialogComponent,
+    DeleteDialogComponent,
+    NotFoundComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -46,7 +51,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressSpinnerModule,
     RouterModule.forRoot(routes, { enableTracing: false }),
   ],
-  providers: [ItemService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorCatchingInterceptor,
+      multi: true
+    },
+    ItemService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -66,7 +66,6 @@
 }
 
 .list-action-icon {
-  color: #673ab7;
   cursor: pointer;
 }
 
@@ -74,6 +73,6 @@
   opacity: 80%;
 }
 
-.list-action-icon:last-child {
-  margin-left: 20px;
+.list-action-icon:not(:last-child) {
+  margin-right: 20px;
 }
