@@ -11,9 +11,9 @@ pipeline {
         stage('Cleaning previous Test') {
             steps {
                 sh(returnStdout: true, script: '''#!/bin/bash
-                    if [[ "$(docker ps -a | grep frontend )" != "" ]] ; then
-                        docker stop frontend
-                        docker rm -f frontend
+                    if [[ "$(docker ps -a | grep segiraldovi/my_front )" != "" ]] ; then
+                        docker stop segiraldovi/my_front
+                        docker rm -f segiraldovi/my_front
                     fi
                     '''.stripIndent()
                 )
@@ -56,7 +56,7 @@ pipeline {
         
         stage('Building Image') {
             steps {
-                sh 'docker build -t my_front --target build .'
+                sh 'docker build -t segiraldovi/my_front --target build .'
             }
         }
 
@@ -64,7 +64,7 @@ pipeline {
             steps {
                 sh 'docker run --name my-postgres --network="my-network" --ip 122.23.0.2 -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres'
                 sh 'docker run --rm --network="my-network" --ip 122.23.0.3 -p 8081:8081 -e DB_URL=122.23.0.2:5432 --name  backend -d segiraldovi/my_back mvn spring-boot:run'
-                sh 'docker run --rm --network="my-network" --ip 122.23.0.4 -p 4200:4200 --name my_front -d my_front npm start'
+                sh 'docker run --rm --network="my-network" --ip 122.23.0.4 -p 4200:4200 --name my_front -d segiraldovi/my_front npm start'
             }
         }
         stage('Pushing'){
