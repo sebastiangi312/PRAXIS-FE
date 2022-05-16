@@ -11,6 +11,13 @@ pipeline {
         stage('Cleaning previous Test') {
             steps {
                 sh(returnStdout: true, script: '''#!/bin/bash
+                    if [[ "$(docker ps -a | grep frontend )" != "" ]] ; then
+                        docker stop frontend
+                        docker rm -f frontend
+                    fi
+                    '''.stripIndent()
+                )
+                sh(returnStdout: true, script: '''#!/bin/bash
                     if [[ "$(docker ps -a | grep my_front )" != "" ]] ; then
                         docker stop my_front
                         docker rm -f my_front
