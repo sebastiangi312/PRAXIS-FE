@@ -19,6 +19,13 @@ pipeline {
                     '''.stripIndent()
                 )
                 sh(returnStdout: true, script: '''#!/bin/bash
+                    if [[ "$(docker ps -a | grep segiraldovi/my_front )" != "" ]] ; then
+                        docker stop segiraldovi/my_front
+                        docker rm -f segiraldovi/my_front
+                    fi
+                    '''.stripIndent()
+                )
+                sh(returnStdout: true, script: '''#!/bin/bash
                     if [[ "$(docker container ls | grep backend )" != "" ]] ; then
                         docker stop backend
                         docker rm backend
