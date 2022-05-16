@@ -10,6 +10,7 @@ pipeline {
         
         stage('Cleaning previous Test') {
             steps {
+                docker image prune --all --force
                 sh(returnStdout: true, script: '''#!/bin/bash
                     if [[ "$(docker ps -a | grep segiraldovi/my_front )" != "" ]] ; then
                         docker stop segiraldovi/my_front
@@ -18,17 +19,9 @@ pipeline {
                     '''.stripIndent()
                 )
                 sh(returnStdout: true, script: '''#!/bin/bash
-                    if [[ "$(docker ps -a | grep my_front )" != "" ]] ; then
-                        docker stop my_front
-                        docker rm -f my_front
-                    fi
-                    '''.stripIndent()
-                )
-                
-                sh(returnStdout: true, script: '''#!/bin/bash
-                    if [[ "$(docker ps -a | grep backend )" != "" ]] ; then
+                    if [[ "$(docker container ls | grep backend )" != "" ]] ; then
                         docker stop backend
-                        docker rm -f backend
+                        docker rm backend
                     fi
                     '''.stripIndent()
                 )
