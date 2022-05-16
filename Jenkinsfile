@@ -13,7 +13,7 @@ pipeline {
                 sh(returnStdout: true, script: '''#!/bin/bash
                     if [[ "$(docker ps -a | grep frontend )" != "" ]] ; then
                         docker stop frontend
-                        docker rm frontend
+                        docker rm -f frontend
                     fi
                     '''.stripIndent()
                 )
@@ -21,14 +21,14 @@ pipeline {
                 sh(returnStdout: true, script: '''#!/bin/bash
                     if [[ "$(docker ps -a | grep backend )" != "" ]] ; then
                         docker stop backend
-                        docker rm backend
+                        docker rm -f backend
                     fi
                     '''.stripIndent()
                 )
                 sh(returnStdout: true, script: '''#!/bin/bash
                     if [[ "$(docker ps -a | grep my-postgres )" != "" ]] ; then
                         docker stop my-postgres
-                        docker rm my-postgres
+                        docker rm -f my-postgres
                     fi
                     '''.stripIndent()
                 )
