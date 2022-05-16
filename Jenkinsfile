@@ -10,7 +10,7 @@ pipeline {
         
         stage('Cleaning previous Test') {
             steps {
-                docker image prune --all --force
+                sh 'docker image prune --all --force'
                 sh(returnStdout: true, script: '''#!/bin/bash
                     if [[ "$(docker ps -a | grep segiraldovi/my_front )" != "" ]] ; then
                         docker stop segiraldovi/my_front
