@@ -11,7 +11,7 @@ pipeline {
         stage('Cleaning previous Test') {
             steps {
                 sh(returnStdout: true, script: '''#!/bin/bash
-                    if [[ "$(docker container ls | grep frontend )" != "" ]] ; then
+                    if [[ "$(docker ps -a | grep frontend )" != "" ]] ; then
                         docker stop frontend
                         docker rm frontend
                     fi
@@ -19,14 +19,14 @@ pipeline {
                 )
                 
                 sh(returnStdout: true, script: '''#!/bin/bash
-                    if [[ "$(docker container ls | grep backend )" != "" ]] ; then
+                    if [[ "$(docker ps -a | grep backend )" != "" ]] ; then
                         docker stop backend
                         docker rm backend
                     fi
                     '''.stripIndent()
                 )
                 sh(returnStdout: true, script: '''#!/bin/bash
-                    if [[ "$(docker container ls | grep my-postgres )" != "" ]] ; then
+                    if [[ "$(docker ps -a | grep my-postgres )" != "" ]] ; then
                         docker stop my-postgres
                         docker rm my-postgres
                     fi
@@ -57,7 +57,7 @@ pipeline {
             steps {
                 sh 'docker run --name my-postgres --network="my-network" --ip 122.23.0.2 -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres'
                 sh 'docker run --rm --network="my-network" --ip 122.23.0.3 -p 8081:8081 -e DB_URL=122.23.0.2:5432 --name  backend segiraldovi/my_back mvn spring-boot:run'
-                sh 'docker run --rm --network="my-network" --ip 122.23.0.4 -p 4200:4200 --name frontend  -d my_front npm start'
+                sh 'docker run --rm --network="my-network" --ip 122.23.0.4 -p 4200:4200 --name frontend  -d   my_front npm start'
             }
         }
         stage('Pushing'){
