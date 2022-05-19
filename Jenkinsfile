@@ -55,8 +55,7 @@ pipeline {
 
         stage('Running Postgres and Data'){
             steps {
-                sh 'docker run --name my-postgres --network="my-network" --ip 122.23.0.2 -e POSTGRES_PASSWORD=secret -p 5432:5432 -d postgres'
-                sh 'docker run --rm --network="my-network" --ip 122.23.0.3 -p 8081:8081 -e DB_URL=122.23.0.2 -e POSTGRES_PORT=8080 --name  backend -d segiraldovi/my_back mvn spring-boot:run'
+                sh 'docker run --rm --network="my-network" --ip 122.23.0.3 -p 8081:8081 -e DB_URL=group5-rds.cqqmj66dxtlw.us-east-1.rds.amazonaws.com -e POSTGRES_PORT=5432 --name  backend -d segiraldovi/my_back mvn spring-boot:run'
                 sh 'docker run --rm --network="my-network" --ip 122.23.0.4 -p 4200:4200 --name my_front -d segiraldovi/my_front npm start'
             }
         }
