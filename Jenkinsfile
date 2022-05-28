@@ -10,8 +10,8 @@ pipeline {
         
         stage('Cleaning previous Test') {
             steps {
-                sh '(docker system prune -af) | true'
                 sh '(docker ps -aq | xargs docker stop | xargs docker rm) | true'
+                sh '(docker volume rm $(docker volume ls -q)) | true'
             }
         }
 
