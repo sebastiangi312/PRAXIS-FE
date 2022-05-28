@@ -10,7 +10,7 @@ pipeline {
         
         stage('Cleaning previous Test') {
             steps {
-                sh '(docker system prune) | true'
+                sh '(sudo docker system prune -af) | true'
                 sh '(docker ps -aq | xargs docker stop | xargs docker rm) | true'
             }
         }
