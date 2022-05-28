@@ -28,7 +28,8 @@ pipeline {
 
         stage('Running Tests'){
             steps {
-                sh 'docker-compose up'
+                sh 'Testing UwU'
+                
             }
         }
         stage('Pushing'){
