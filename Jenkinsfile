@@ -16,7 +16,7 @@ pipeline {
 
         stage('Cloning Repo') {
             steps {
-                sh 'https://github.com/sebastiangi312/PRAXIS-FE'
+                checkout scm
             }
         }
         
