@@ -28,7 +28,7 @@ pipeline {
 
         stage('Running Tests'){
             steps {
-                sh 'Testing UwU'
+                sh 'echo Testing UwU'
                 
             }
         }
