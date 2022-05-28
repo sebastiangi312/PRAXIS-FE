@@ -1,0 +1,32 @@
+version: "3"
+services:
+  APP:
+    container_name: frontend
+    image: segiraldovi/my_front
+    build: ./
+    ports:
+      - 4200:4200
+    environment:
+      - API_URL=api
+      - API_PORT=8081
+    depends_on:
+      - api
+
+  api:
+    container_name: backend
+    image: segiraldovi/my_back
+    ports:
+      - 8081:8081
+    environment:
+      - POSTGRES_PORT=5432
+      - DB_URL=dbpostgresql
+    depends_on:
+      - dbpostgresql
+
+  dbpostgresql:
+    container_name: my-postgres
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=secret
