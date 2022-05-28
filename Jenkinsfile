@@ -10,9 +10,7 @@ pipeline {
         
         stage('Cleaning previous Test') {
             steps {
-                if [ ! -z "$docker ps" ]; then 
-                    sh '(docker ps -aq | xargs docker stop | xargs docker rm)'
-                fi
+                sh '(docker ps -aq | xargs docker stop | xargs docker rm) | True'
             }
         }
 
