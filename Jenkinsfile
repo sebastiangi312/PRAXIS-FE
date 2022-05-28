@@ -10,7 +10,7 @@ pipeline {
         
         stage('Cleaning previous Test') {
             steps {
-                sh 'docker ps -aq | xargs docker stop | xargs docker rm'
+                sh '(docker ps -aq | xargs docker stop | xargs docker rm) || True'
             }
         }
 
