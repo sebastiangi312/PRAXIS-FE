@@ -18,15 +18,5 @@ services:
     ports:
       - 8081:8081
     environment:
+      - DB_URL=group5-rds.cqqmj66dxtlw.us-east-1.rds.amazonaws.com
       - POSTGRES_PORT=5432
-      - DB_URL=dbpostgresql
-    depends_on:
-      - dbpostgresql
-
-  dbpostgresql:
-    container_name: my-postgres
-    image: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      - POSTGRES_PASSWORD=secret
