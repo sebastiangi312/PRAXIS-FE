@@ -10,9 +10,10 @@ pipeline {
         
         stage('Cleaning previous Test') {
             steps {
-                sh '(docker ps -aq | xargs docker stop | xargs docker rm) | true'
-                sh 'docker system prune -af'
-                sh '(docker volume rm $(docker volume ls -q)) | true'
+                sh '(docker rm backend_ft -f) | true'
+                sh '(docker rm frontend_ft -f) | true'
+                sh '(docker rmi segiraldovi/my_back -f) | true'
+                sh '(docker rmi segiraldovi/my_front -f) | true'
             }
         }
 
@@ -28,12 +29,6 @@ pipeline {
             }
         }
 
-        stage('Running Tests'){
-            steps {
-                sh 'echo Testing UwU'
-                
-            }
-        }
         stage('Pushing'){
             steps {
                 sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin '

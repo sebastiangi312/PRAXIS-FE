@@ -1,7 +1,7 @@
 version: "3"
 services:
   APP:
-    container_name: frontend
+    container_name: frontend_ft
     image: segiraldovi/my_front
     build: ./
     ports:
@@ -13,7 +13,7 @@ services:
       - api
 
   api:
-    container_name: backend
+    container_name: backend_ft
     image: segiraldovi/my_back
     ports:
       - 8081:8081
