@@ -12,8 +12,8 @@ pipeline {
             steps {
                 sh '(docker rm backend_ft -f) | true'
                 sh '(docker rm frontend_ft -f) | true'
-                sh '(docker rmi segiraldovi/my_back -f) | true'
-                sh '(docker rmi segiraldovi/my_front -f) | true'
+                sh '(docker rmi segiraldovi/my_back) | true'
+                sh '(docker rmi segiraldovi/my_front) | true'
             }
         }
 
