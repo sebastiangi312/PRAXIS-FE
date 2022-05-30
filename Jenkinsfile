@@ -9,15 +9,15 @@ pipeline {
     stages {
         
         stage('Cleaning previous Test') {
-            sh '''
-                  docker stop backend_ft || true
-                  docker stop frontend_ft || true
+            steps {
+               sh '''
+                  docker stop backend_ut || true
                   docker container prune -f
                '''
                sh '''
                   docker image rm -f segiraldovi/my_back || true
-                  docker image rm -f segiraldovi/my_front || true
                '''
+            }
         }
 
         stage('Cloning Repo') {
