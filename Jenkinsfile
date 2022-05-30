@@ -10,10 +10,9 @@ pipeline {
         
         stage('Cleaning previous Test') {
             steps {
-                sh '(docker rm backend_ft -f) | true'
-                sh '(docker rm frontend_ft -f) | true'
-                sh '(docker rmi segiraldovi/my_back) | true'
-                sh '(docker rmi segiraldovi/my_front) | true'
+                sh '(docker ps -aq | xargs docker stop | xargs docker rm) | true'
+                sh 'docker system prune -af'
+                sh '(docker volume rm $(docker volume ls -q)) | true'
             }
         }
 
