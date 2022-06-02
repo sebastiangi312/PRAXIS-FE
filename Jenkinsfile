@@ -25,6 +25,9 @@ pipeline {
         stage('Cloning Repo') {
             steps {
                 checkout scm
+                sh 'docker container ls'
+                sh 'docker image ls'
+                sh 'docker volume ls'
             }
         }
         
