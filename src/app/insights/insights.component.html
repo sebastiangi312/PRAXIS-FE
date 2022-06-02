@@ -22,7 +22,7 @@
           class="insights-value"
           [attr.data-automation]="'item-type-' + key + '-value' | lowercase"
         >
-          1000
+          {{ itemsDictionary[key] }}
         </div>
       </ng-container>
     </div>
